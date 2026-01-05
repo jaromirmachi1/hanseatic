@@ -17,7 +17,6 @@ npm run preview
 ```
 
 ### Notes
+
 - The original static prototype is preserved in `legacy-static/`.
 - Images are local SVG placeholders in `src/assets/`.
-
-

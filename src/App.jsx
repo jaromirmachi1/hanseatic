@@ -3,6 +3,7 @@ import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 
+// Local “mock photo” SVGs (offline-friendly).
 import heroImg from "./assets/photo-hero.svg";
 import processImg from "./assets/photo-process.svg";
 import woodImg from "./assets/material-wood.svg";
@@ -21,7 +22,9 @@ export default function App() {
 
   useLayoutEffect(() => {
     // Respect reduced motion.
-    const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+    const reduceMotion = window.matchMedia?.(
+      "(prefers-reduced-motion: reduce)"
+    )?.matches;
     gsap.registerPlugin(ScrollTrigger);
 
     if (reduceMotion) return undefined;
@@ -47,14 +50,14 @@ export default function App() {
     gsap.fromTo(
       ".site-header",
       { autoAlpha: 0, y: -10 },
-      { autoAlpha: 1, y: 0, duration: 1.6, ease: "power2.out", delay: 0.05 },
+      { autoAlpha: 1, y: 0, duration: 1.6, ease: "power2.out", delay: 0.05 }
     );
 
     // 2) Hero: text fade-in + scroll-linked scale on background
     gsap.fromTo(
       ".hero-content",
       { autoAlpha: 0, y: 16 },
-      { autoAlpha: 1, y: 0, duration: 2.1, ease: "power2.out", delay: 0.15 },
+      { autoAlpha: 1, y: 0, duration: 2.1, ease: "power2.out", delay: 0.15 }
     );
 
     gsap.fromTo(
@@ -69,7 +72,7 @@ export default function App() {
           end: "bottom top",
           scrub: 1.2,
         },
-      },
+      }
     );
 
     // 3) Materials: stagger fade-up on scroll
@@ -83,7 +86,7 @@ export default function App() {
         stagger: 0.12,
         ease: "power2.out",
         scrollTrigger: { trigger: "#materials", start: "top 72%", once: true },
-      },
+      }
     );
 
     // 4) Process: gentle text slide + image clip reveal
@@ -97,7 +100,7 @@ export default function App() {
         stagger: 0.08,
         ease: "power2.out",
         scrollTrigger: { trigger: ".process", start: "top 75%", once: true },
-      },
+      }
     );
 
     gsap.fromTo(
@@ -107,14 +110,22 @@ export default function App() {
         clipPath: "inset(0 0 0% 0 round 22px)",
         duration: 2.3,
         ease: "power2.out",
-        scrollTrigger: { trigger: ".process", start: "top 72%", end: "bottom 55%" },
-      },
+        scrollTrigger: {
+          trigger: ".process",
+          start: "top 72%",
+          end: "bottom 55%",
+        },
+      }
     );
 
     // 5) Gallery: pinned, scrubbed crossfades between edge-to-edge images
     const panels = gsap.utils.toArray(".gallery-panel");
     if (panels.length) {
-      gsap.set(panels, { autoAlpha: 0, scale: 1.04, transformOrigin: "center" });
+      gsap.set(panels, {
+        autoAlpha: 0,
+        scale: 1.04,
+        transformOrigin: "center",
+      });
       gsap.set(panels[0], { autoAlpha: 1, scale: 1.01 });
 
       const tl = gsap.timeline({
@@ -131,14 +142,23 @@ export default function App() {
       });
 
       for (let i = 1; i < panels.length; i += 1) {
-        tl.to(panels[i - 1], { autoAlpha: 0, scale: 1.02, duration: 1.1 }, "+=0.35");
+        tl.to(
+          panels[i - 1],
+          { autoAlpha: 0, scale: 1.02, duration: 1.1 },
+          "+=0.35"
+        );
         tl.to(panels[i], { autoAlpha: 1, scale: 1.0, duration: 1.2 }, "<");
       }
 
       gsap.fromTo(
         ".gallery-copy",
         { autoAlpha: 0 },
-        { autoAlpha: 1, duration: 1.8, ease: "power1.out", scrollTrigger: { trigger: ".gallery", start: "top 90%", once: true } },
+        {
+          autoAlpha: 1,
+          duration: 1.8,
+          ease: "power1.out",
+          scrollTrigger: { trigger: ".gallery", start: "top 90%", once: true },
+        }
       );
     }
 
@@ -146,7 +166,13 @@ export default function App() {
     gsap.fromTo(
       ".cta-inner",
       { autoAlpha: 0, y: 14 },
-      { autoAlpha: 1, y: 0, duration: 1.7, ease: "power2.out", scrollTrigger: { trigger: ".cta", start: "top 78%", once: true } },
+      {
+        autoAlpha: 1,
+        y: 0,
+        duration: 1.7,
+        ease: "power2.out",
+        scrollTrigger: { trigger: ".cta", start: "top 78%", once: true },
+      }
     );
 
     // Cleanup on unmount (important in React dev mode / HMR).
@@ -194,16 +220,25 @@ export default function App() {
       <main id="main">
         <section className="hero" id="top" aria-label="Hanseatic hero">
           <div className="hero-media" aria-hidden="true">
-            <img src={heroImg} alt="" loading="eager" decoding="async" />
+            <img
+              src={heroImg}
+              alt=""
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
+            />
             <div className="hero-scrim" aria-hidden="true" />
           </div>
 
           <div className="container hero-content">
             <p className="eyebrow">Premium flooring, quietly confident.</p>
-            <h1 className="hero-title">Scandinavian calm. Architectural precision.</h1>
+            <h1 className="hero-title">
+              Scandinavian calm. Architectural precision.
+            </h1>
             <p className="hero-subtitle">
-              Hanseatic delivers refined surfaces for residential and commercial spaces—crafted with restraint,
-              installed with care, finished with longevity in mind.
+              Hanseatic delivers refined surfaces for residential and commercial
+              spaces—crafted with restraint, installed with care, finished with
+              longevity in mind.
             </p>
 
             <div className="hero-actions">
@@ -227,74 +262,116 @@ export default function App() {
                 <h2 className="h2">Surface, tone, texture.</h2>
               </div>
               <p className="section-lede">
-                Curated options for modern interiors—each selected for tactility, performance, and understated warmth.
+                Curated options for modern interiors—each selected for
+                tactility, performance, and understated warmth.
               </p>
             </header>
 
             <div className="materials-grid">
               <article className="material-card">
                 <div className="material-media">
-                  <img src={woodImg} alt="Warm wood flooring texture" loading="lazy" decoding="async" />
+                  <img
+                    src={woodImg}
+                    alt="Warm wood flooring texture"
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </div>
                 <h3 className="h3">Wood</h3>
-                <p className="muted">Natural grain, matte finish, soft underfoot.</p>
+                <p className="muted">
+                  Natural grain, matte finish, soft underfoot.
+                </p>
               </article>
 
               <article className="material-card">
                 <div className="material-media">
-                  <img src={vinylImg} alt="Minimal vinyl flooring surface" loading="lazy" decoding="async" />
+                  <img
+                    src={vinylImg}
+                    alt="Minimal vinyl flooring surface"
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </div>
                 <h3 className="h3">Vinyl</h3>
-                <p className="muted">Quiet durability—ideal for high-traffic zones.</p>
+                <p className="muted">
+                  Quiet durability—ideal for high-traffic zones.
+                </p>
               </article>
 
               <article className="material-card">
                 <div className="material-media">
-                  <img src={carpetImg} alt="Textured carpet surface in neutral tones" loading="lazy" decoding="async" />
+                  <img
+                    src={carpetImg}
+                    alt="Textured carpet surface in neutral tones"
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </div>
                 <h3 className="h3">Carpet</h3>
-                <p className="muted">Soft acoustics, subtle texture, calm spaces.</p>
+                <p className="muted">
+                  Soft acoustics, subtle texture, calm spaces.
+                </p>
               </article>
 
               <article className="material-card">
                 <div className="material-media">
-                  <img src={stoneImg} alt="Stone flooring surface in pale beige tones" loading="lazy" decoding="async" />
+                  <img
+                    src={stoneImg}
+                    alt="Stone flooring surface in pale beige tones"
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </div>
                 <h3 className="h3">Stone</h3>
-                <p className="muted">Quiet mass, clean lines, timeless presence.</p>
+                <p className="muted">
+                  Quiet mass, clean lines, timeless presence.
+                </p>
               </article>
             </div>
           </div>
         </section>
 
-        <section className="section section--stone" id="process" aria-label="Craft and process">
+        <section
+          className="section section--stone"
+          id="process"
+          aria-label="Craft and process"
+        >
           <div className="container process">
             <div className="process-copy">
               <p className="eyebrow">Craft</p>
               <h2 className="h2">Measured planning. Precise installation.</h2>
               <p className="section-lede">
-                We work with architects, builders, and homeowners to ensure each surface reads cleanly across light,
-                shadow, and time.
+                We work with architects, builders, and homeowners to ensure each
+                surface reads cleanly across light, shadow, and time.
               </p>
 
               <ol className="process-steps">
                 <li>
-                  <strong>Consult</strong> — a calm, detailed specification session.
+                  <strong>Consult</strong> — a calm, detailed specification
+                  session.
                 </li>
                 <li>
-                  <strong>Prepare</strong> — subfloor leveling and moisture control.
+                  <strong>Prepare</strong> — subfloor leveling and moisture
+                  control.
                 </li>
                 <li>
-                  <strong>Install</strong> — accurate layout, tight seams, quiet edges.
+                  <strong>Install</strong> — accurate layout, tight seams, quiet
+                  edges.
                 </li>
                 <li>
-                  <strong>Finish</strong> — protective treatments and long-term guidance.
+                  <strong>Finish</strong> — protective treatments and long-term
+                  guidance.
                 </li>
               </ol>
             </div>
 
             <figure className="process-media" aria-label="Craft photography">
-              <img src={processImg} alt="Craft detail placeholder image" loading="lazy" decoding="async" />
+              <img
+                src={processImg}
+                alt="Craft detail placeholder image"
+                loading="lazy"
+                decoding="async"
+              />
             </figure>
           </div>
         </section>
@@ -303,13 +380,28 @@ export default function App() {
           <div className="gallery-pin">
             <div className="gallery-track" aria-hidden="true">
               <figure className="gallery-panel">
-                <img src={g1} alt="Gallery image 1" loading="lazy" decoding="async" />
+                <img
+                  src={g1}
+                  alt="Gallery image 1"
+                  loading="lazy"
+                  decoding="async"
+                />
               </figure>
               <figure className="gallery-panel">
-                <img src={g2} alt="Gallery image 2" loading="lazy" decoding="async" />
+                <img
+                  src={g2}
+                  alt="Gallery image 2"
+                  loading="lazy"
+                  decoding="async"
+                />
               </figure>
               <figure className="gallery-panel">
-                <img src={g3} alt="Gallery image 3" loading="lazy" decoding="async" />
+                <img
+                  src={g3}
+                  alt="Gallery image 3"
+                  loading="lazy"
+                  decoding="async"
+                />
               </figure>
             </div>
 
@@ -317,29 +409,46 @@ export default function App() {
               <div className="container gallery-copy">
                 <p className="eyebrow">Gallery</p>
                 <h2 className="h2">Light, texture, proportion.</h2>
-                <p className="muted">Scroll to move through a calm sequence of surfaces.</p>
+                <p className="muted">
+                  Scroll to move through a calm sequence of surfaces.
+                </p>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="section cta" id="contact" aria-label="Request a quote">
+        <section
+          className="section cta"
+          id="contact"
+          aria-label="Request a quote"
+        >
           <div className="container cta-inner">
             <p className="eyebrow">Next</p>
             <h2 className="h2">Request a quote.</h2>
             <p className="section-lede">
-              Tell us the space, the timeline, and the material direction. We’ll respond with clarity—and no noise.
+              Tell us the space, the timeline, and the material direction. We’ll
+              respond with clarity—and no noise.
             </p>
 
             <form className="cta-form" autoComplete="on">
               <label className="field">
                 <span className="field-label">Name</span>
-                <input className="field-input" type="text" name="name" placeholder="Your name" />
+                <input
+                  className="field-input"
+                  type="text"
+                  name="name"
+                  placeholder="Your name"
+                />
               </label>
 
               <label className="field">
                 <span className="field-label">Email</span>
-                <input className="field-input" type="email" name="email" placeholder="you@studio.com" />
+                <input
+                  className="field-input"
+                  type="email"
+                  name="email"
+                  placeholder="you@studio.com"
+                />
               </label>
 
               <label className="field field--full">
@@ -356,7 +465,9 @@ export default function App() {
                 <button className="btn" type="button">
                   Send request
                 </button>
-                <p className="fineprint">This is a static demo. Hook the form to your backend later.</p>
+                <p className="fineprint">
+                  This is a static demo. Hook the form to your backend later.
+                </p>
               </div>
             </form>
           </div>
@@ -366,7 +477,8 @@ export default function App() {
       <footer className="site-footer">
         <div className="container footer-inner">
           <p className="muted">
-            © <span id="year" /> Hanseatic Flooring. Quiet luxury, built to last.
+            © <span id="year" /> Hanseatic Flooring. Quiet luxury, built to
+            last.
           </p>
           <p className="muted">Images are local SVG placeholders.</p>
         </div>
@@ -374,5 +486,3 @@ export default function App() {
     </>
   );
 }
-
-
