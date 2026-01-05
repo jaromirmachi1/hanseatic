@@ -4,7 +4,6 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 
 // Local “mock photo” SVGs (offline-friendly).
-import heroImg from "./assets/photo-hero.svg";
 import processImg from "./assets/photo-process.svg";
 import woodImg from "./assets/material-wood.svg";
 import vinylImg from "./assets/material-vinyl.svg";
@@ -13,6 +12,10 @@ import stoneImg from "./assets/material-stone.svg";
 import g1 from "./assets/photo-gallery-01.svg";
 import g2 from "./assets/photo-gallery-02.svg";
 import g3 from "./assets/photo-gallery-03.svg";
+
+// Hero photography (Unsplash). Swap to any indoor floor shot you like.
+const HERO_IMG =
+  "https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=2400&q=80";
 
 export default function App() {
   useEffect(() => {
@@ -221,7 +224,7 @@ export default function App() {
         <section className="hero" id="top" aria-label="Hanseatic hero">
           <div className="hero-media" aria-hidden="true">
             <img
-              src={heroImg}
+              src={HERO_IMG}
               alt=""
               loading="eager"
               decoding="async"
@@ -230,16 +233,10 @@ export default function App() {
             <div className="hero-scrim" aria-hidden="true" />
           </div>
 
-          <div className="container hero-content">
-            <p className="eyebrow">Premium flooring, quietly confident.</p>
+          <div className="container container--hero hero-content">
             <h1 className="hero-title">
               Scandinavian calm. Architectural precision.
             </h1>
-            <p className="hero-subtitle">
-              Hanseatic delivers refined surfaces for residential and commercial
-              spaces—crafted with restraint, installed with care, finished with
-              longevity in mind.
-            </p>
 
             <div className="hero-actions">
               <a className="btn" href="#materials">
@@ -249,8 +246,6 @@ export default function App() {
                 Request a quote
               </a>
             </div>
-
-            <p className="hero-note">Scroll slowly</p>
           </div>
         </section>
 
