@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1400" viewBox="0 0 1800 1400">
+  <defs>
+    <linearGradient id="p0" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fbfaf7"/>
+      <stop offset="0.55" stop-color="#efe9df"/>
+      <stop offset="1" stop-color="#dfd6c6"/>
+    </linearGradient>
+    <filter id="grain" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="matrix" values="
+        1 0 0 0 0
+        0 1 0 0 0
+        0 0 1 0 0
+        0 0 0 0.10 0"/>
+    </filter>
+  </defs>
+
+  <rect width="1800" height="1400" fill="url(#p0)"/>
+
+  <!-- linear plank suggestion -->
+  <g opacity="0.7">
+    <rect x="140" y="200" width="1520" height="90" fill="#ffffff" opacity="0.55"/>
+    <rect x="140" y="320" width="1520" height="90" fill="#ffffff" opacity="0.42"/>
+    <rect x="140" y="440" width="1520" height="90" fill="#ffffff" opacity="0.48"/>
+    <rect x="140" y="560" width="1520" height="90" fill="#ffffff" opacity="0.40"/>
+    <rect x="140" y="680" width="1520" height="90" fill="#ffffff" opacity="0.46"/>
+    <rect x="140" y="800" width="1520" height="90" fill="#ffffff" opacity="0.38"/>
+  </g>
+
+  <!-- quiet tooling lines -->
+  <g opacity="0.18" stroke="#1f1f1f" stroke-width="2">
+    <line x1="260" y1="260" x2="1500" y2="260"/>
+    <line x1="260" y1="620" x2="1500" y2="620"/>
+    <line x1="260" y1="860" x2="1500" y2="860"/>
+  </g>
+
+  <rect width="1800" height="1400" filter="url(#grain)" opacity="0.65"/>
+</svg>
+
+
+

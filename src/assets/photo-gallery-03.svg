@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1400" viewBox="0 0 2400 1400">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fbfaf7"/>
+      <stop offset="0.55" stop-color="#eae3d8"/>
+      <stop offset="1" stop-color="#d7cebe"/>
+    </linearGradient>
+    <radialGradient id="light" cx="42%" cy="18%" r="72%">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.78"/>
+      <stop offset="0.6" stop-color="#ffffff" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="grain" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.78" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="matrix" values="
+        1 0 0 0 0
+        0 1 0 0 0
+        0 0 1 0 0
+        0 0 0 0.08 0"/>
+    </filter>
+  </defs>
+
+  <rect width="2400" height="1400" fill="url(#bg)"/>
+
+  <!-- edge-to-edge floor with calmer, wider planks -->
+  <path d="M0,520 C520,420 1040,400 1500,480 C1940,560 2260,720 2400,860 V1400 H0 Z"
+        fill="#e6dccd" opacity="0.72"/>
+
+  <g opacity="0.18" stroke="#1f1f1f" stroke-width="2">
+    <path d="M0,680 H2400" />
+    <path d="M0,820 H2400" />
+    <path d="M0,960 H2400" />
+    <path d="M0,1100 H2400" />
+    <path d="M0,1240 H2400" />
+  </g>
+
+  <!-- soft highlight -->
+  <rect width="2400" height="1400" fill="url(#light)"/>
+  <rect width="2400" height="1400" filter="url(#grain)" opacity="0.72"/>
+</svg>
+
+

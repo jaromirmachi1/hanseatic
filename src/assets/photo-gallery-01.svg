@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1400" viewBox="0 0 2400 1400">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fbfaf7"/>
+      <stop offset="0.6" stop-color="#ece4d8"/>
+      <stop offset="1" stop-color="#d6ccbc"/>
+    </linearGradient>
+    <radialGradient id="light" cx="38%" cy="24%" r="70%">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.86"/>
+      <stop offset="0.55" stop-color="#ffffff" stop-opacity="0.20"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="grain" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.82" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="matrix" values="
+        1 0 0 0 0
+        0 1 0 0 0
+        0 0 1 0 0
+        0 0 0 0.09 0"/>
+    </filter>
+  </defs>
+
+  <rect width="2400" height="1400" fill="url(#bg)"/>
+
+  <!-- "interior photo" planes -->
+  <path d="M0,0 H2400 V690 C1840,640 1420,620 1040,620 C610,620 280,650 0,700 Z"
+        fill="#ffffff" opacity="0.56"/>
+  <path d="M0,690 C360,620 760,600 1120,600 C1620,600 2040,700 2400,840 V1400 H0 Z"
+        fill="#e6dccd" opacity="0.72"/>
+
+  <!-- floor seams (calm perspective) -->
+  <g opacity="0.18" stroke="#1f1f1f" stroke-width="2">
+    <path d="M-60,980 L2600,760" />
+    <path d="M-60,1080 L2600,840" />
+    <path d="M-60,1180 L2600,920" />
+    <path d="M-60,1280 L2600,1000" />
+  </g>
+
+  <rect width="2400" height="1400" fill="url(#light)"/>
+  <rect width="2400" height="1400" filter="url(#grain)" opacity="0.7"/>
+</svg>
+
+
